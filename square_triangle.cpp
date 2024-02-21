@@ -1,0 +1,73 @@
+#include <GL/glut.h>
+
+using namespace std;
+
+void draw(){
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    // Change color to black
+    glColor3f(0.0,0.0,0.0);
+
+    // Draw X - Axes
+    glBegin(GL_LINES);
+    glVertex2f(0,-20);
+    glVertex2f(0,20);
+    glEnd();
+
+    // Draw Y - Axes
+    glBegin(GL_LINES);
+    glVertex2f(-20,0);
+    glVertex2f(20,0);
+    glEnd();
+
+    // Draw the Square
+    glPushMatrix();
+    glRotatef(48,0,0,1);
+    glScalef(2,2,1); // Scale by 2
+    glScalef(1,-1,1); // Reflect the y axis
+    glBegin(GL_QUAD_STRIP); // Use Quadrilateral primitive
+    glColor3f(0.0,0.0,1.0);
+    glVertex2d(-3,5);
+    glVertex2d(0,-4);
+    glVertex2d(3,7);
+    glVertex2d(6,-2);
+    glEnd();
+    glPopMatrix();
+
+     // Dotted Square image
+    glEnable(GL_LINE_STIPPLE);
+    glLineStipple(1,GL_LINE_STIPPLE_PATTERN); // Use the dotted pattern
+    glBegin(GL_LINES); //Use Line Primitives
+    glColor3f(1.0,0.0,0.0); // Set color to red
+    glVertex2d(-3,5);
+    glVertex2d(0,-4);
+    glVertex2d(3,7);
+    glVertex2d(6,-2);
+    glVertex2d(-3,5);
+    glVertex2d(3,7);
+    glVertex2d(0,-4);
+    glVertex2d(6,-2);
+    glEnd();
+    glDisable(GL_LINE_STIPPLE);
+
+    glFlush();
+}
+
+void init(){
+    glClearColor(1.0, 1.0, 1.0, 0.0); // Background to white
+    gluOrtho2D(-20, 20, -20, 20);
+}
+
+int main(int argc, char** argv){
+    //Initialize glut
+    glutInit(&argc,argv);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+    glutInitWindowSize(800,800); //size of window
+    glutInitWindowPosition(100,150); // position of window
+    glutCreateWindow("Square - Triangle"); // name of the window
+    init(); // user init function
+    glutDisplayFunc(draw);
+    glutMainLoop();
+
+    return 0;
+}
