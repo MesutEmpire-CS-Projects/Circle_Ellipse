@@ -1,0 +1,10 @@
+.idea
+.vscode
+*.out
+
+bresenham_circle_algorithm
+bresenham_ellipse
+midpoint_circle_algorithm
+midpoint_ellipse
+square_triangle
+details.txt
